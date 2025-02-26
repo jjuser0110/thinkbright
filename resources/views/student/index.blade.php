@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<style>
+  .table> :not(caption)>*>*{
+    padding: 0.5rem 0.5rem !important;
+    font-size: 0.8rem !important;
+  }
+  </style>
 @section('body')
 <h4 class="font-weight-bolder mb-0">Students</h4>
 <div class="row" style="margin-top:20px">
@@ -16,7 +22,7 @@
                   <th >Name</th>
                   <th >Chinese Name</th>
                   <th >DoB</th>
-                  <th >IC</th>
+                  <!-- <th >IC</th> -->
                   <th >Deposit</th>
                   <th >School</th>
                   <th >Level</th>
@@ -32,7 +38,7 @@
                     <td>{{$s->name ??""}}</td>
                     <td>{{$s->c_name ??""}}</td>
                     <td>{{$s->dob ??""}}</td>
-                    <td>{{$s->ic ??""}}</td>
+                    <!-- <td>{{$s->ic ??""}}</td> -->
                     <td>{{$s->deposit ??""}}</td>
                     <td>{{$s->school->name ??""}}</td>
                     <td>{{$s->level ??""}}</td>

@@ -46,7 +46,7 @@
                     <td>{{$s->class ??""}}</td>
                     <td>{{$s->parent_name ??""}}</td>
                     <td>{{$s->parent_contact ??""}}</td>
-                    <td><?php echo $s->is_active == 1?'<span style="color:green">Active</span>':'<span style="color:green">Inactive</span>' ?></td>
+                    <td><?php echo $s->is_active == 1?'<span style="color:green">Active</span>':'<span style="color:red">Inactive</span>' ?></td>
                     <td>
                       <a style="text-decoration: none; color: inherit;" href="{{ route('student.edit',$s) }}" title="Edit">
                         <i class="fas fa-pencil-alt"></i>

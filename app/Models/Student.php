@@ -16,6 +16,7 @@ class Student extends Model
         'dob',
         'ic',
         'level',
+        'deposit',
         'class',
         'school_id',
         'parent_name',

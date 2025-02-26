@@ -46,6 +46,10 @@
                 <label for="name">Student IC</label>
                 <input type="text" class="form-control" id="ic" name="ic" placeholder="Student IC...." @if(isset($student)) value="{{$student->ic}}" @endif  autocomplete="off">
                 </div>
+                <div class="col-sm-6 margin_top">
+                <label for="name">Deposit</label>
+                <input type="text" class="form-control" id="deposit" name="deposit" placeholder="Deposit" @if(isset($student)) value="{{$student->deposit}}" @endif  autocomplete="off">
+                </div>
                 <div class="col-sm-4 margin_top">
                 <label for="role">School</label>
                 <select id="school_id" name="school_id" class="form-control">

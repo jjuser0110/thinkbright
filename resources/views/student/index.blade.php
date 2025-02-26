@@ -17,6 +17,7 @@
                   <th >Chinese Name</th>
                   <th >DoB</th>
                   <th >IC</th>
+                  <th >Deposit</th>
                   <th >School</th>
                   <th >Level</th>
                   <th >Class</th>
@@ -32,6 +33,7 @@
                     <td>{{$s->c_name ??""}}</td>
                     <td>{{$s->dob ??""}}</td>
                     <td>{{$s->ic ??""}}</td>
+                    <td>{{$s->deposit ??""}}</td>
                     <td>{{$s->school->name ??""}}</td>
                     <td>{{$s->level ??""}}</td>
                     <td>{{$s->class ??""}}</td>

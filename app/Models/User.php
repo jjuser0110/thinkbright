@@ -26,6 +26,10 @@ class User extends Authenticatable
         'contact',
         'username',
         'is_active',
+        'shortname',
+        'bank_id',
+        'bank_account',
+        'no_of_annual_leave'
     ];
 
     /**
@@ -50,5 +54,5 @@ class User extends Authenticatable
     public function routeNotificationForWhatsApp()
     {
         return $this->contact;
-    }   
+    }
 }

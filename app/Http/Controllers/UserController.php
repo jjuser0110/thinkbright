@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -16,13 +17,14 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = User::whereIn('role',['teacher','admin'])->get();
-        
+
         return view('user.index')->with('user',$user);
     }
 
     public function create()
     {
-        return view('user.create');
+        $banks = Bank::all();
+        return view('user.create', compact('banks'));
     }
 
     public function store(Request $request)
@@ -36,19 +38,20 @@ class UserController extends Controller
         }
         $request->merge(['role'=>'teacher','password'=>Hash::make('123456789')]);
         User::create($request->all());
-        
+
         return redirect()->route('user.index');
     }
 
     public function edit(User $user)
     {
-        return view('user.create')->with('user',$user);
+        $banks = Bank::all();
+        return view('user.create', compact('user', 'banks'));
     }
 
     public function update(Request $request, User $user)
     {
         $user->update($request->all());
-        
+
         return redirect()->route('user.index');
     }
 
@@ -64,7 +67,7 @@ class UserController extends Controller
         return view('user.change_password');
     }
 
-    
+
     public function changePassword(Request $request)
     {
         $request->validate([
@@ -84,5 +87,5 @@ class UserController extends Controller
 
         return redirect()->back()->withSuccess('Password Changed!');
     }
-   
+
 }

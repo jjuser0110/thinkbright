@@ -39,7 +39,7 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" >
           <center>
-         <img src="{{asset('logo.png')}}" class="navbar-brand-img h-100 full_height" alt="main_logo"> 
+         <img src="{{asset('logo.png')}}" class="navbar-brand-img h-100 full_height" alt="main_logo">
          </center>
       </a>
     </div>
@@ -168,7 +168,7 @@
             <span class="nav-link-text ms-1">Receipt</span>
           </a>
         </li>
-        
+
         <li class="nav-item">
           <a class="nav-link  " href="{{ route('account_month.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -177,7 +177,7 @@
             <span class="nav-link-text ms-1">Account</span>
           </a>
         </li>
-        
+
         <li class="nav-item">
           <a class="nav-link  " href="{{ route('student.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -186,7 +186,7 @@
             <span class="nav-link-text ms-1">Student Details</span>
           </a>
         </li>
-        
+
         <!--<li class="nav-item mt-3">-->
         <!--  <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Boss</h6>-->
         <!--</li>-->
@@ -239,6 +239,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link  " href="{{ route('bank.index') }}">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa-solid fa-bank" style="color:black"></i>
+            </div>
+            <span class="nav-link-text ms-1">Bank Setting</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link  " href="{{ route('user.change_password') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa-solid fa-lock" style="color:black"></i>
@@ -246,7 +254,7 @@
             <span class="nav-link-text ms-1">Change Pass</span>
           </a>
         </li>
-        
+
         <li class="nav-item">
               <form method="POST" action="{{ route('logout') }}">
                   @csrf
@@ -254,7 +262,7 @@
                           onclick="event.preventDefault();
                                       this.closest('form').submit();">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              
+
               <i class="fa fa-sign-out" style="color:black"></i>
             </div>
             <span class="nav-link-text ms-1" >
@@ -457,7 +465,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-      
+
 					@include('layouts.flash-message')
       @yield('body')
     </div>

@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-sm-6 margin_top">
                     <label for="bank_account">Bank Account</label>
-                    <input type="number" class="form-control" id="bank_account" name="bank_account" placeholder="bank aacount...." @if(isset($user)) value="{{ $user->bank_account }}" @endif required autocomplete="off">
+                    <input type="number" class="form-control" id="bank_account" name="bank_account" placeholder="bank account...." @if(isset($user)) value="{{ $user->bank_account }}" @endif required autocomplete="off">
                 </div>
                 <div class="col-sm-6 margin_top">
                     <label for="name">Is Active</label>

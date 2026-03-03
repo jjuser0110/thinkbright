@@ -5,6 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\User;
+use Socialite;
+use Auth;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -37,11 +43,31 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    
     
     public function username()
     {
         return 'username';
+    }
+
+    public function authenticated(Request $request, $user)
+    {
+        // dd($user);
+        if ($user->is_active != 1) {
+            Auth::logout();
+            
+            return redirect()->route('login')->withErrors('Your account has been locked. Please contact your Boss!');
+        }else{
+            if($user->role_id == 4 || $user->role_id == 3){
+                return redirect()->route('daily_activity.index')->withSuccess('Successfully Login');
+            }else if($user->role_id == 6){
+                return redirect()->route('daily_cleaning.index')->withSuccess('Successfully Login');
+            }else if($user->role_id == 5 || $user->role_id == 7){
+                Auth::logout();
+                
+                return redirect()->route('login')->withErrors('you have no access to this system. Please contact your leader!');
+            }else{
+                return redirect()->route('home')->withSuccess('Successfully Login');
+            }
+        }
     }
 }

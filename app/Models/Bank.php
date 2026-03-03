@@ -12,7 +12,6 @@ class Bank extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'bank_name',
-        'short_name',
+        'name',
     ];
 }

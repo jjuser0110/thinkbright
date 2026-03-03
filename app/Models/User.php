@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable,HasRolesAndAbilities,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -21,15 +24,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
-        'ic',
-        'contact',
+        'remember_token',
         'username',
+        'role_id',
         'is_active',
-        'shortname',
-        'bank_id',
-        'bank_account',
-        'no_of_annual_leave'
+        'line',
+        'salary_per_hour',
+        'salary_per_day',
     ];
 
     /**
@@ -51,8 +52,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function routeNotificationForWhatsApp()
+    public function role()
     {
-        return $this->contact;
+        return $this->belongsTo('App\Models\Role');
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo('App\Models\Branch');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
     }
 }

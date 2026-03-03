@@ -21,7 +21,15 @@ class AccountMonth extends Model
         return $this->hasMany('App\Models\Account');
     }
 
-    public function getMonthNameAttribute(){
-        return date("F", mktime(0, 0, 0, $this->month, 10));
+    public function getMonthNameAttribute()
+    {
+        return date("F", mktime(
+            0, 
+            0, 
+            0, 
+            (int)$this->month, 
+            1, 
+            (int)$this->year
+        ));
     }
 }

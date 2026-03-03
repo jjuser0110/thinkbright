@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateFoodTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('running_numbers', function (Blueprint $table) {
+        Schema::create('food', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->string('name');
-            $table->integer('year');
-            $table->integer('month');
-            $table->integer('no_of_digit_behind');
-            $table->integer('running_no');
+            $table->string('month')->nullable();
+            $table->string('year')->nullable();
+            $table->date('date_of_food')->nullable();
+            $table->integer('food_type_id')->nullable();
+            $table->double('quantity')->nullable();
+            $table->double('total')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('running_numbers');
+        Schema::dropIfExists('food');
     }
-};
+}

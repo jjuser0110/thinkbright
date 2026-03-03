@@ -59,6 +59,12 @@ $currentRoute = request()->route()->getName();
             </ul>
         </li>
         @endif
+        <li class="menu-item {{ Str::contains($currentRoute, 'receipt.index') ? 'active' : ''}}">
+            <a href="{{ route('receipt.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+                <div>Receipt</div>
+            </a>
+        </li>
         <li class="menu-item {{ Str::contains($currentRoute, 'daily_cleaning.index') ? 'active' : ''}}">
             <a href="{{ route('daily_cleaning.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-spreadsheet"></i>

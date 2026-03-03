@@ -4,17 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateSchoolsTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('banks', function (Blueprint $table) {
+        Schema::create('schools', function (Blueprint $table) {
             $table->id();
-            $table->string('bank_name');
-            $table->string('short_name');
+            $table->string('name')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -22,9 +23,11 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('banks');
+        Schema::dropIfExists('schools');
     }
-};
+}

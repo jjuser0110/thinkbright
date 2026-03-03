@@ -4,28 +4,33 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class AddNewcolumnToUsersTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->string('role')->nullable();
+            $table->string('ic')->nullable();
+            $table->string('contact')->nullable();
             $table->string('username')->unique();
-            $table->integer('role_id');
             $table->integer('is_active')->default(1);
-            $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::table('users', function (Blueprint $table) {
             //
         });
     }
-};
+}

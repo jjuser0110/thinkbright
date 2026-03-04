@@ -1,5 +1,21 @@
 @extends('layouts.app')
 @section('content')
+<style>
+  #example1 {
+      border-left: 1px solid #e0e0e0;
+      border-right: 1px solid #e0e0e0;
+  }
+
+  #example1 thead th,
+  #example1 tbody td {
+      padding: 12px 15px !important;
+  }
+
+  .dataTables_wrapper {
+      padding: 10px;
+  }
+</style>
+
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <!-- Content -->
 
@@ -8,8 +24,8 @@
 
 
         <div class="card">
-            <div class="card-header flex-column flex-md-row">
-                <div class="head-label" style="margin-bottom:10px">
+            <div class="card-header flex-column flex-md-row" style="padding-bottom:0px;">
+                <div class="head-label">
                     <h5 class="card-title mb-0">Receipt</h5>
                 </div>
                 <div class="col-md-6 col-12 mb-4">
@@ -24,7 +40,8 @@
                 </div>
             </div>
             <div class="row">
-            <table id="example1" class="table table-bordered table-striped">
+              <div class="col-12">
+                <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th >Name</th>
@@ -55,6 +72,7 @@
                   @endforeach
               </tbody>  
             </table>
+            </div>
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">

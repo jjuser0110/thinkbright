@@ -1,5 +1,20 @@
 @extends('layouts.app')
 @section('content')
+<style>
+  #example1 {
+      border-left: 1px solid #e0e0e0;
+      border-right: 1px solid #e0e0e0;
+  }
+
+  #example1 thead th,
+  #example1 tbody td {
+      padding: 12px 15px !important;
+  }
+
+  .dataTables_wrapper {
+      padding: 10px;
+  }
+</style>
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <!-- Content -->
 
@@ -7,22 +22,23 @@
         <h4 class="py-3 breadcrumb-wrapper mb-4"><span class="text-muted fw-light">Account</span></h4>
 
         <div class="card">
-            <div class="card-header flex-column flex-md-row">
-                <div class="head-label" style="margin-bottom:10px">
+            <div class="card-header flex-column flex-md-row" style="padding-bottom:0px;">
+                <div class="head-label">
                     <h5 class="card-title mb-0">Account</h5>
                 </div>
                 <div class="dt-action-buttons text-end pt-3 pt-md-0">
                     <div class="dt-buttons"> 
                         <a class="dt-button create-new btn btn-primary" type="button" href="{{route('account_month.create')}}" onclick="showLoading()">
                             <span><i class="bx bx-plus me-sm-1"></i> 
-                                <span class="d-none d-sm-inline-block">Add New Record</span>
+                                <span class="d-none d-sm-inline-block">Add Account Month</span>
                             </span>
                         </a> 
                     </div>
                 </div>
             </div>
             <div class="row">
-              <table id="example1" class="table table-bordered table-striped">
+              <div class="col-12">
+                <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th >Month</th>
@@ -71,6 +87,7 @@
                     @endforeach
                 </tbody>  
               </table>
+            </div>
           </div>
         </div>
     </div>

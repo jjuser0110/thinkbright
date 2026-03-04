@@ -19,18 +19,18 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 breadcrumb-wrapper mb-4"><span class="text-muted fw-light">Bank</span></h4>
+        <h4 class="py-3 breadcrumb-wrapper mb-4"><span class="text-muted fw-light">Student</span></h4>
 
         <div class="card">
             <div class="card-header flex-column flex-md-row" style="padding-bottom:0px;">
                 <div class="head-label">
-                    <h5 class="card-title mb-0">Bank</h5>
+                    <h5 class="card-title mb-0">Student</h5>
                 </div>
                 <div class="dt-action-buttons text-end pt-3 pt-md-0">
                     <div class="dt-buttons"> 
-                        <a class="dt-button create-new btn btn-primary" type="button" href="{{route('bank.create')}}" onclick="showLoading()">
+                        <a class="dt-button create-new btn btn-primary" type="button" href="{{route('student.create')}}" onclick="showLoading()">
                             <span><i class="bx bx-plus me-sm-1"></i> 
-                                <span class="d-none d-sm-inline-block">Add Bank</span>
+                                <span class="d-none d-sm-inline-block">Add Student</span>
                             </span>
                         </a> 
                     </div>
@@ -39,28 +39,47 @@
             <div class="row">
               <div class="col-12">
                 <table id="example1" class="table table-bordered table-striped">
-                <thead>
+                  <thead>
                   <tr>
-                    <th>Name</th>
-                    <th></th>
+                    <th >Name</th>
+                    <th >Chinese Name</th>
+                    <th >DoB</th>
+                    <!-- <th >IC</th> -->
+                    <th >Deposit</th>
+                    <th >School</th>
+                    <th >Level</th>
+                    <th >Class</th>
+                    <th >Parent</th>
+                    <th >Parent Contact</th>
+                    <th >Status</th>
+                    <th ></th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($banks as $bank)
+                  @foreach ($student as $s)
                     <tr>
-                      <td>{{ $bank->name ?? "" }}</td>
+                      <td>{{$s->name ??""}}</td>
+                      <td>{{$s->c_name ??""}}</td>
+                      <td>{{$s->dob ??""}}</td>
+                      <!-- <td>{{$s->ic ??""}}</td> -->
+                      <td>{{$s->deposit ??""}}</td>
+                      <td>{{$s->school->name ??""}}</td>
+                      <td>{{$s->level ??""}}</td>
+                      <td>{{$s->class ??""}}</td>
+                      <td>{{$s->parent_name ??""}}</td>
+                      <td>{{$s->parent_contact ??""}}</td>
+                      <td><?php echo $s->is_active == 1?'<span style="color:green">Active</span>':'<span style="color:red">Inactive</span>' ?></td>
                       <td>
-                        <a style="text-decoration: none; color: inherit;" href="{{ route('bank.edit', $bank) }}" title="Edit">
+                        <a style="text-decoration: none; color: inherit;" href="{{ route('student.edit',$s) }}" title="Edit">
                           <i class="fas fa-pencil-alt"></i>
                         </a>
                         &nbsp;&nbsp;
-                        @if(Auth::user()->role == "superadmin")
-                          <button type="button" style="background: none; padding: 0px; border: none; color: inherit;" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='{{ route('bank.destroy', $bank) }}' }"><i class="fas fa-trash-alt"></i></button>
-                        @endif
+                          <!-- <button type="button" style="background: none; padding: 0px; border: none; color: inherit;" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='{{ route('student.destroy',$s) }}' }"><i class="fas fa-trash-alt"></i></button> -->
+                          
                       </td>
                     </tr>
                     @endforeach
-                </tbody>
+                </tbody>  
               </table>
             </div>
           </div>

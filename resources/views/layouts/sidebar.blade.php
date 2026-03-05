@@ -50,12 +50,12 @@ $currentRoute = request()->route()->getName();
             <span class="menu-header-text" data-i18n="Account &amp; Info">Account &amp; Info</span>
         </li>
         
-        <li class="menu-item {{ Str::contains($currentRoute, 'receipt.index') ? 'active' : ''}}">
+        <!-- <li class="menu-item {{ Str::contains($currentRoute, 'receipt.index') ? 'active' : ''}}">
             <a href="{{ route('receipt.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
                 <div>Receipt</div>
             </a>
-        </li>
+        </li> -->
         <li class="menu-item {{ Str::contains($currentRoute, 'account_month.index') ? 'active' : ''}}">
             <a href="{{ route('account_month.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-spreadsheet"></i>

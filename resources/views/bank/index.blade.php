@@ -68,7 +68,6 @@
     </div>
     <!-- / Content -->
 
-
     @endsection
     @section('page-js')
     @endsection

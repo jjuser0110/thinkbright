@@ -1,15 +1,44 @@
 @extends('layouts.app')
+@section('content')
+<style>
+  #example1 {
+      border-left: 1px solid #e0e0e0;
+      border-right: 1px solid #e0e0e0;
+  }
 
+  #example1 thead th,
+  #example1 tbody td {
+      padding: 12px 15px !important;
+  }
+
+  .dataTables_wrapper {
+      padding: 10px;
+  }
+</style>
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-@section('body')
-<h4 class="font-weight-bolder mb-0">Extra Receiveds</h4>
-<div class="row" style="margin-top:20px">
-    <div class="card">
-      <div class="card-body p-3">
-      <button class="btn btn-sm btn-primary" style="margin-right:10px" onclick="window.location.href='{{ route('extra_received.create') }}'"><i class="mdi mdi-plus-circle-outline"></i>Add Extra Received</button>  
-      
-        <div class="row">
-            <table id="example1" class="table table-bordered table-striped">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="py-3 breadcrumb-wrapper mb-4"><span class="text-muted fw-light">Extra Received</span></h4>
+
+        <div class="card">
+            <div class="card-header flex-column flex-md-row" style="padding-bottom:0px;">
+                <div class="head-label">
+                    <h5 class="card-title mb-0">Extra Received</h5>
+                </div>
+                <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                    <div class="dt-buttons"> 
+                        <a class="dt-button create-new btn btn-primary" type="button" href="{{route('extra_received.create')}}" onclick="showLoading()">
+                            <span><i class="bx bx-plus me-sm-1"></i> 
+                                <span class="d-none d-sm-inline-block">Add Extra Received</span>
+                            </span>
+                        </a> 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th >Month</th>
@@ -40,12 +69,16 @@
                   @endforeach
               </tbody>  
             </table>
+          </div>
         </div>
       </div>
     </div>
 </div>
 
 @endsection
+    @section('page-js')
+    @endsection
+    @section('scripts')
 <script src="{{ asset('js/jquery-3.4.1.min.js')}}"></script>
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -64,3 +97,4 @@
   }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
   </script>
+  @endsection

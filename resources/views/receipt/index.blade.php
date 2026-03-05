@@ -87,13 +87,21 @@
                 <input type="text" name="account_id" id="account_id" hidden>
                 <input type="checkbox" onClick="toggle(this)" value="select_all"/> Select All<br/>
                 <input type="checkbox"  name="selected_field[]"  value="tuition"> Tuition <br>
+                <input type="text" class="form-control" name="tuition_desc" id="tuition_desc" placeholder="Extra tuition"><br>
                 <input type="checkbox"  name="selected_field[]"  value="tuition_extra"> Tuition Extra<br>
+                <input type="text" class="form-control" name="tuition_extra_desc" id="tuition_extra_desc" placeholder="Extra tuition 2"><br>
                 <input type="checkbox"  name="selected_field[]"  value="food"> Food <br>
+                <input type="text" class="form-control" name="food_desc" id="food_desc" placeholder="Extra food"><br>
                 <input type="checkbox"  name="selected_field[]"  value="transport"> Transport <br>
+                <input type="text" class="form-control" name="transport_desc" id="transport_desc" placeholder="Extra transport"><br>
                 <input type="checkbox"  name="selected_field[]"  value="transport_extra"> Transport Extra <br>
+                <input type="text" class="form-control" name="transport_extra_desc" id="transport_extra_desc" placeholder="Extra transport 2"><br>
                 <input type="checkbox"  name="selected_field[]"  value="deposit"> Deposit <br>
+                <input type="text" class="form-control" name="deposit_desc" id="deposit_desc" placeholder="Extra deposit"><br>
                 <input type="checkbox"  name="selected_field[]"  value="material"> Material <br>
+                <input type="text" class="form-control" name="material_desc" id="material_desc" placeholder="Extra material"><br>
                 <input type="checkbox"  name="selected_field[]"  value="registration"> Registration <br>
+                <input type="text" class="form-control" name="registration_desc" id="registration_desc" placeholder="Extra registration"><br>
                 <input type="checkbox"  name="selected_field[]"  value="extra"> Extra <br>
                 <input type="text" class="form-control" name="extra_desc" id="extra_desc" placeholder="Extra descriptions"><br>
                 <input type="checkbox"  name="selected_field[]"  value="extra_2"> Extra_2 <br>
@@ -171,6 +179,14 @@
       var postData = {};
       postData.selected_field = array;
       postData.account_id = document.getElementById("account_id").value;
+      postData.tuition_desc = document.getElementById("tuition_desc").value;
+      postData.tuition_extra_desc = document.getElementById("tuition_extra_desc").value;
+      postData.food_desc = document.getElementById("food_desc").value;
+      postData.transport_desc = document.getElementById("transport_desc").value;
+      postData.transport_extra_desc = document.getElementById("transport_extra_desc").value;
+      postData.deposit_desc = document.getElementById("deposit_desc").value;
+      postData.material_desc = document.getElementById("material_desc").value;
+      postData.registration_desc = document.getElementById("registration_desc").value;
       postData.extra_desc = document.getElementById("extra_desc").value;
       postData.extra_desc_2 = document.getElementById("extra_desc_2").value;
       postData._token = "{{ csrf_token() }}";

@@ -13,12 +13,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Quantum Data System</title>
+    <title>Think Bright</title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('logosmall.png') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -68,7 +68,7 @@
               <!-- Logo -->
               <div class="app-brand justify-content-center">
                 <a href="{{route('home')}}" class="app-brand-link gap-2">
-                  <img src="{{ asset('logosmall.png') }}" alt="Logo" style="width:50%; display:block; margin:0 auto;" />
+                  <img src="{{ asset('logo.png') }}" alt="Logo" style="width:50%; display:block; margin:0 auto;" />
                 </a>
               </div>
               <!-- /Logo -->

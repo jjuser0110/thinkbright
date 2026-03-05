@@ -1,15 +1,44 @@
 @extends('layouts.app')
+@section('content')
+<style>
+  #example1 {
+      border-left: 1px solid #e0e0e0;
+      border-right: 1px solid #e0e0e0;
+  }
 
+  #example1 thead th,
+  #example1 tbody td {
+      padding: 12px 15px !important;
+  }
+
+  .dataTables_wrapper {
+      padding: 10px;
+  }
+</style>
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-@section('body')
-<h4 class="font-weight-bolder mb-0">Salary</h4>
-<div class="row" style="margin-top:20px">
-    <div class="card">
-      <div class="card-body p-3">
-      <button class="btn btn-sm btn-primary" style="margin-right:10px" onclick="window.location.href='{{ route('salary.create') }}'"><i class="mdi mdi-plus-circle-outline"></i>Add Salary</button>  
-      
-        <div class="row">
-            <table id="example1" class="table table-bordered table-striped">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="py-3 breadcrumb-wrapper mb-4"><span class="text-muted fw-light">Salary</span></h4>
+
+        <div class="card">
+            <div class="card-header flex-column flex-md-row" style="padding-bottom:0px;">
+                <div class="head-label">
+                    <h5 class="card-title mb-0">Salary</h5>
+                </div>
+                <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                    <div class="dt-buttons"> 
+                        <a class="dt-button create-new btn btn-primary" type="button" href="{{route('salary.create')}}" onclick="showLoading()">
+                            <span><i class="bx bx-plus me-sm-1"></i> 
+                                <span class="d-none d-sm-inline-block">Add Salary</span>
+                            </span>
+                        </a> 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th >Teacher Name</th>
@@ -53,11 +82,15 @@
               </tbody>  
             </table>
         </div>
-      </div>
+          </div>
+        </div>
     </div>
-</div>
+    <!-- / Content -->
 
-@endsection
+    @endsection
+    @section('page-js')
+    @endsection
+    @section('scripts')
 <script src="{{ asset('js/jquery-3.4.1.min.js')}}"></script>
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -92,7 +125,6 @@
         }
       });
     }
-
     
     var height = 20;
     function pdf_generate(data){
@@ -241,61 +273,7 @@
         doc.setDrawColor(0.5);
         doc.line(20, right_hand_height+=2, 150, right_hand_height);
       }
-      // doc.setFontType("normal");
-      // doc.text(80, height, ":    "+data.receipt_no, null, null, '');
-      // doc.setFontType("bold");
-      // doc.text(20, height+=8, "Receipt Date", null, null, '');
-      // doc.setFontType("normal");
-      // doc.text(80, height, ":    "+data.date_print, null, null, '');
-      // doc.setFontType("bold");
-      // doc.text(20, height+=8, "Received From", null, null, '');
-      // doc.setFontType("normal");
-      // doc.text(80, height, ":    "+data.student_name, null, null, '');
-      // doc.setFontType("bold");
-      // doc.text(20, height+=8, "For", null, null, '');
-      // doc.setFontType("normal");
-      // doc.text(80, height, ":    "+data.for, null, null, '');
-      
-      // doc.setDrawColor(0);
-      // doc.setFontSize("10");
-      // doc.setFontType("bold");
-      // doc.line(20, height+=10, 191, height);
-      // doc.text(21, height+=7, 'No.');
-      // doc.text(41, height, 'Item');
-      // doc.text(190, height, 'Amount (RM)', null, null, 'right');
-      // doc.line(20, height+=6, 191, height);
-      // var index = 1;
-		  // data.item.forEach(function (row) {
-      //   doc.setFontType("normal");
-      //   doc.text(21, height+=8, index.toFixed()+'.');
-      //   doc.text(41, height, row.item_name);
-      //   doc.text(190, height, row.cost.toFixed(2), null, null, 'right');
-      //   index++;
-      // });
-      // index-=1;
-      //footer
-      // height = 225;
-      // doc.setFontSize("10");
-      // doc.setFontType("bold");
-      // doc.text(21, height, data.total_english);
-      // doc.line(20, height+=2, 191, height);
-      // doc.line(20, height+=1, 191, height);
-      // doc.setFontSize("12");
-      // doc.text(21, height+=6, 'Item Total :  ' + index.toFixed());
-      // doc.text(155, height, "Subtotal :", null, null, 'right');
-      // doc.text(190, height, "RM "+ data.total.toFixed(2), null, null, 'right');
-      // doc.line(135, height+=2, 191, height);
-      // doc.line(135, height+=1, 191, height);
-      // doc.setFontSize("10");
-      // doc.text(21, 280, "This is computer generated receipt no signature required.");
-      
-      // var string = doc.output('datauristring');
-      // var iframe = "<iframe width='100%' id='iframe11' height='100%' src='" + string + "'></iframe>"
-      // var x = window.open();
-      // x.document.open();
-      // x.document.write(iframe);
-      // x.document.close(); 
       doc.save(data.user.name+'('+data.year_month+').pdf');
-      //location.reload();
     }
   </script>
+    @endsection

@@ -54,7 +54,7 @@
                           <i class="fas fa-pencil-alt"></i>
                         </a>
                         &nbsp;&nbsp;
-                        @if(Auth::user()->role == "superadmin")
+                        @if(Auth::user()->role == "admin")
                           <button type="button" style="background: none; padding: 0px; border: none; color: inherit;" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='{{ route('bank.destroy', $bank) }}' }"><i class="fas fa-trash-alt"></i></button>
                         @endif
                       </td>

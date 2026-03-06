@@ -19,18 +19,18 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 breadcrumb-wrapper mb-4"><span class="text-muted fw-light">School</span></h4>
+        <h4 class="py-3 breadcrumb-wrapper mb-4"><span class="text-muted fw-light">Public Holiday</span></h4>
 
         <div class="card">
             <div class="card-header flex-column flex-md-row" style="padding-bottom:0px;">
                 <div class="head-label">
-                    <h5 class="card-title mb-0">School</h5>
+                    <h5 class="card-title mb-0">Public Holiday</h5>
                 </div>
                 <div class="dt-action-buttons text-end pt-3 pt-md-0">
                     <div class="dt-buttons"> 
-                        <a class="dt-button create-new btn btn-primary" type="button" href="{{route('school.create')}}" onclick="showLoading()">
+                        <a class="dt-button create-new btn btn-primary" type="button" href="{{route('public_holiday.create')}}" onclick="showLoading()">
                             <span><i class="bx bx-plus me-sm-1"></i> 
-                                <span class="d-none d-sm-inline-block">Add School</span>
+                                <span class="d-none d-sm-inline-block">Add Public Holiday</span>
                             </span>
                         </a> 
                     </div>
@@ -41,33 +41,36 @@
                 <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th >Name</th>
-                    <th ></th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($school as $c)
+                  @foreach ($public_holiday as $public_holiday)
                     <tr>
-                      <td>{{$c->name ??""}}</td>
+                      <td>{{ $public_holiday->name ?? "" }}</td>
+                      <td>{{ \Carbon\Carbon::parse($public_holiday->date)->format('d F') }}</td>
+                      <td>{{ $public_holiday->is_active == 1 ? 'Active' : 'Inactive' }}</td>
                       <td>
-                        <a style="text-decoration: none; color: inherit;" href="{{ route('school.edit',$c) }}" title="Edit">
+                        <a style="text-decoration: none; color: inherit;" href="{{ route('public_holiday.edit', $public_holiday) }}" title="Edit">
                           <i class="fas fa-pencil-alt"></i>
                         </a>
                         &nbsp;&nbsp;
                         @if(Auth::user()->role == "admin")
-                          <button type="button" style="background: none; padding: 0px; border: none; color: inherit;" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='{{ route('school.destroy',$c) }}' }"><i class="fas fa-trash-alt"></i></button>
-                          @endif
+                          <button type="button" style="background: none; padding: 0px; border: none; color: inherit;" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='{{ route('public_holiday.destroy', $public_holiday) }}' }"><i class="fas fa-trash-alt"></i></button>
+                        @endif
                       </td>
                     </tr>
                     @endforeach
-                </tbody>  
+                </tbody>
               </table>
             </div>
           </div>
         </div>
     </div>
     <!-- / Content -->
-
 
     @endsection
     @section('page-js')

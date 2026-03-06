@@ -74,6 +74,15 @@ $currentRoute = request()->route()->getName();
                 <div>Teacher Details</div>
             </a>
         </li>
+        <li class="menu-item {{ Str::contains($currentRoute, 'bank_account.index') ? 'active' : ''}}">
+            <a href="{{ route('bank_account.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+                <div>Bank Account</div>
+            </a>
+        </li>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text" data-i18n="Settings">Setting</span>
+        </li>
         <li class="menu-item {{ Str::contains($currentRoute, 'school.index') ? 'active' : ''}}">
             <a href="{{ route('school.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
@@ -86,10 +95,10 @@ $currentRoute = request()->route()->getName();
                 <div>Bank Setting</div>
             </a>
         </li>
-        <li class="menu-item {{ Str::contains($currentRoute, 'bank_account.index') ? 'active' : ''}}">
-            <a href="{{ route('bank_account.index') }}" class="menu-link">
+        <li class="menu-item {{ Str::contains($currentRoute, 'public_holiday.index') ? 'active' : ''}}">
+            <a href="{{ route('public_holiday.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
-                <div>Bank Account</div>
+                <div>Public Holiday Setting</div>
             </a>
         </li>
     </ul>

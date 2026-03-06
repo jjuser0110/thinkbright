@@ -80,8 +80,16 @@ $currentRoute = request()->route()->getName();
                 <div>Bank Account</div>
             </a>
         </li>
+        
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text" data-i18n="Settings">Setting</span>
+        </li>
+        
+        <li class="menu-item {{ Str::contains($currentRoute, 'category.index') ? 'active' : ''}}">
+            <a href="{{ route('category.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+                <div>Category Setting</div>
+            </a>
         </li>
         <li class="menu-item {{ Str::contains($currentRoute, 'school.index') ? 'active' : ''}}">
             <a href="{{ route('school.index') }}" class="menu-link">

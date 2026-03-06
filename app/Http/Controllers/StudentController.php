@@ -7,20 +7,23 @@ use Spatie\Browsershot\Browsershot;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\School;
+use App\Models\Category;
 
 class StudentController extends Controller
 {
     public function index(Request $request)
     {
         $student = Student::all();
+        $category = Category::all();
         
-        return view('student.index')->with('student',$student);
+        return view('student.index')->with('category',$category)->with('student',$student);
     }
 
     public function create()
     {
         $school = School::all();
-        return view('student.create')->with('school',$school);
+        $category = Category::all();
+        return view('student.create')->with('school',$school)->with('category',$category);
     }
 
     public function store(Request $request)
@@ -33,7 +36,8 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $school = School::all();
-        return view('student.create')->with('school',$school)->with('student',$student);
+        $category = Category::all();
+        return view('student.create')->with('school',$school)->with('category',$category)->with('student',$student);
     }
 
     public function update(Request $request, Student $student)

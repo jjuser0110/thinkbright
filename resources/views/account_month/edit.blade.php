@@ -1,6 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    /* Force override Bootstrap table-striped on all states */
+    tr[data-highlight="true"] > td {
+        background-color: lightgreen !important;
+        --bs-table-bg: lightgreen !important;
+        --bs-table-striped-bg: lightgreen !important;
+        --bs-table-hover-bg: lightgreen !important;
+        --bs-table-active-bg: lightgreen !important;
+        --bs-table-accent-bg: lightgreen !important;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
 <div class="container-fluid flex-grow-1 px-5 mt-5">
 
     <h4 class="py-2 breadcrumb-wrapper mb-3">
@@ -23,8 +44,10 @@
                                     <th class="text-center">No.</th>
                                     <th>Student</th>
                                     <th class="text-center">Tuition</th>
-                                    <th class="text-center">TT Add</th>
+                                    <th class="text-center">1-1 Add</th>
+                                    <th class="text-center">1-1 Deduct</th>
                                     <th class="text-center">B&L</th>
+                                    <th class="text-center">Tea</th>
                                     <th class="text-center">Trans</th>
                                     <th class="text-center">Trans Add</th>
                                     <th class="text-center">Deposit</th>
@@ -43,15 +66,14 @@
                             <tbody>
                                 <?php $index=1; ?>
                                 @foreach ($account_month->accounts as $a)
-                                <tr id="tr~{{$a->id}}" 
-                                    {{ $a->paid != null ? 'style=background-color:lightgreen' : '' }}>
+                                <tr id="tr~{{$a->id}}">
                                     
                                     <td class="text-center">{{$index}}</td>
                                     <td>{{$a->student->name ?? ""}}</td>
 
                                     @php
                                         $fields = [
-                                            'tuition','tuition_extra','food','transport',
+                                            'tuition','tuition_extra','tuition_deduct','food','food_extra','transport',
                                             'transport_extra','deposit','material',
                                             'registration','extra','extra_2'
                                         ];
@@ -66,7 +88,12 @@
                                             name="{{$field}}~{{$a->id}}"
                                             id="{{$field}}~{{$a->id}}"
                                             value="{{$a->$field ?? ''}}"
-                                            onchange="saveData(this)">
+                                            @if(!in_array($field, ['tuition_extra','tuition_deduct']))
+                                                onchange="saveData(this)"
+                                            @else
+                                                readonly
+                                            @endif
+                                            >
                                     </td>
                                     @endforeach
 
@@ -159,15 +186,27 @@
 
                 <div class="form-check mb-1">
                     <input class="form-check-input" type="checkbox" name="selected_field[]" value="tuition_extra" id="tuition_extra">
-                    <label class="form-check-label">Tuition Extra</label>
+                    <label class="form-check-label">1-1 Add</label>
                 </div>
-                <input type="text" class="form-control form-control-sm mb-3" name="tuition_extra_desc" id="tuition_extra_desc" placeholder="Tuition extra description">
+                <input type="text" class="form-control form-control-sm mb-3" name="tuition_extra_desc" id="tuition_extra_desc" placeholder="Tuition add description">
 
+                <div class="form-check mb-1">
+                    <input class="form-check-input" type="checkbox" name="selected_field[]" value="tuition_deduct" id="tuition_deduct">
+                    <label class="form-check-label">1-1 Deduct</label>
+                </div>
+                <input type="text" class="form-control form-control-sm mb-3" name="tuition_deduct_desc" id="tuition_deduct_desc" placeholder="Tuition deduct description">
+                
                 <div class="form-check mb-1">
                     <input class="form-check-input" type="checkbox" name="selected_field[]" value="food" id="food">
                     <label class="form-check-label">Food</label>
                 </div>
                 <input type="text" class="form-control form-control-sm mb-3" name="food_desc" id="food_desc" placeholder="Food description">
+
+                <div class="form-check mb-1">
+                    <input class="form-check-input" type="checkbox" name="selected_field[]" value="food_extra" id="food_extra">
+                    <label class="form-check-label">Food Extra</label>
+                </div>
+                <input type="text" class="form-control form-control-sm mb-3" name="food_extra_desc" id="food_extra_desc" placeholder="Food description">
 
                 <div class="form-check mb-1">
                     <input class="form-check-input" type="checkbox" name="selected_field[]" value="transport" id="transport">
@@ -226,14 +265,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 
 <script>
-// ─── Existing save/checkbox functions ───────────────────────────────────────
-
 function saveData(data){
     var value = data.value;
     if(value == ""){
         value = 'z';
     }
-
     $.ajax({
         url: "{{ url('/account_month/update') }}/" + data.name + "/" + value,
         method: 'GET',
@@ -250,15 +286,15 @@ function checkboxClick(data){
         url: "{{ url('/account_month/update') }}/" + data.name + "/" + check,
         method: 'GET',
         success: function(response) {
-            if(response.account.paid != null){
-                document.getElementById(response.column_name).style.backgroundColor = 'lightgreen';
-            }
+            var id       = data.name.split('~')[1];
+            var sentEl   = document.getElementById('sent~' + id);
+            var paidEl   = document.getElementById('paid~' + id);
+            var printBtn = document.getElementById('print~' + id);
 
-            // Extract account id from field name e.g. "sent~12" -> "12"
-            var id = data.name.split('~')[1];
-            var sentChecked  = document.getElementById('sent~' + id).checked;
-            var paidChecked  = document.getElementById('paid~' + id).checked;
-            var printBtn     = document.getElementById('print~' + id);
+            var sentChecked = sentEl ? sentEl.checked : false;
+            var paidChecked = paidEl ? paidEl.checked : false;
+
+            highlightRow(id, sentChecked && paidChecked);
 
             if(sentChecked && paidChecked){
                 printBtn.classList.remove('text-secondary');
@@ -275,10 +311,16 @@ function checkboxClick(data){
     });
 }
 
-// ─── Receipt / Print functions ───────────────────────────────────────────────
+function highlightRow(id, on){
+    var row = document.getElementById('tr~' + id);
+    if(on){
+        row.setAttribute('data-highlight', 'true');
+    } else {
+        row.removeAttribute('data-highlight');
+    }
+}
 
 function openModal(data){
-    // Reset all checkboxes and text fields each time modal opens
     var checkboxes = document.getElementsByName('selected_field[]');
     for(var i = 0; i < checkboxes.length; i++){
         checkboxes[i].checked = false;
@@ -304,7 +346,6 @@ function toggle(source){
 function openPDF(){
     var array = [];
     var checkboxes = document.querySelectorAll('input[name="selected_field[]"]:checked');
-
     for(var i = 0; i < checkboxes.length; i++){
         array.push(checkboxes[i].value);
     }
@@ -314,7 +355,9 @@ function openPDF(){
     postData.account_id            = document.getElementById("account_id").value;
     postData.tuition_desc          = document.getElementById("tuition_desc").value;
     postData.tuition_extra_desc    = document.getElementById("tuition_extra_desc").value;
+    postData.tuition_deduct_desc   = document.getElementById("tuition_deduct_desc").value;
     postData.food_desc             = document.getElementById("food_desc").value;
+    postData.food_extra_desc       = document.getElementById("food_extra_desc").value;
     postData.transport_desc        = document.getElementById("transport_desc").value;
     postData.transport_extra_desc  = document.getElementById("transport_extra_desc").value;
     postData.deposit_desc          = document.getElementById("deposit_desc").value;
@@ -382,12 +425,12 @@ function pdf_generate(data){
         doc.setFontType("normal");
         doc.text(21, height+=8, index.toFixed()+'.');
         doc.text(41, height, row.item_name);
-        doc.text(190, height, row.cost.toFixed(2), null, null, 'right');
+        var costDisplay = row.cost.toFixed(2);
+        doc.text(190, height, costDisplay, null, null, 'right');
         index++;
     });
     index -= 1;
 
-    // footer
     height = 225;
     doc.setFontSize("10");
     doc.setFontType("bold");
@@ -405,6 +448,14 @@ function pdf_generate(data){
 
     doc.save(data.student_name+'('+data.for+').pdf');
 }
+
+document.addEventListener('DOMContentLoaded', function(){
+    @foreach($account_month->accounts as $a)
+        @if($a->sent != null && $a->paid != null)
+            highlightRow({{ $a->id }}, true);
+        @endif
+    @endforeach
+});
 </script>
 
 @endsection

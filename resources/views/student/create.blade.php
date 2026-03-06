@@ -73,6 +73,18 @@
                       </div>
 
                       <div class="col-md-4">
+                          <label class="form-label">Category</label>
+                          <select name="category_id" class="form-control">
+                              @foreach($category as $s)
+                                  <option value="{{$s->id}}"
+                                  {{ (isset($student) && $student->category_id == $s->id) ? 'selected' : '' }}>
+                                      {{$s->name}}
+                                  </option>
+                              @endforeach
+                          </select>
+                      </div>
+
+                      <div class="col-md-4">
                           <label class="form-label">Student Level</label>
                           <input type="number" class="form-control"
                               name="level"

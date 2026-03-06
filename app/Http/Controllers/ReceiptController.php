@@ -60,11 +60,17 @@ class ReceiptController extends Controller
                   $item_name= "Tuition Fees";
                   break;
                 case "tuition_extra":
-                  $item_name = "Additional Tuition Fees";
+                  $item_name = "Additional 1-1 Fees";
+                  break;
+                case "tuition_deduct":
+                    $item_name = "Deduction 1-1 Fees";
                   break;
                 case "food":
                     $item_name = "Bath & Lunch";
                   break;
+                case "food_extra":
+                    $item_name = "TeaBreak";
+                  break;  
                 case "transport":
                     $item_name = "Transport";
                   break;
@@ -95,11 +101,13 @@ class ReceiptController extends Controller
                 default:
                     $item_name = "Wrong";
             }
-            if($account->$row>0){
-                $data = ['item_name'=>$item_name,'cost'=>$account->$row];
-                $total+=$account->$row;
-                array_push($item,$data);
-                $field.=$item_name.",";
+            if($account->$row != 0 && $account->$row != null){
+                $cost = $account->$row;
+
+                $data  = ['item_name' => $item_name, 'cost' => $cost];
+                $total += $cost;
+                array_push($item, $data);
+                $field .= $item_name.",";
             }
         }
         $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);

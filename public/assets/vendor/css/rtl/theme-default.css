@@ -79,7 +79,7 @@ body {
 }
 
 .text-body[href]:hover {
-  color: rgb(81, 126.9, 214.2) !important;
+  color: rgb(250, 148, 22) !important;
 }
 
 .bg-primary {
@@ -87,7 +87,7 @@ body {
 }
 
 a.bg-primary:hover, a.bg-primary:focus {
-  background-color: rgb(85.5, 133.95, 226.1) !important;
+  background-color: rgb(250, 148, 22) !important;
 }
 
 .dropdown-notifications-item:not(.mark-as-read) .dropdown-notifications-read span {
@@ -300,14 +300,14 @@ button.list-group-item-primary.active {
 }
 .btn-check:focus + .btn-primary, .btn-primary:focus, .btn-primary.focus {
   color: #fff;
-  background-color: rgb(76.5, 119.85, 202.3);
-  border-color: rgb(76.5, 119.85, 202.3);
+  background-color: rgb(250, 148, 22);
+  border-color: rgb(250, 148, 22);
   box-shadow: none;
 }
 .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .btn-primary.show.dropdown-toggle, .show > .btn-primary.dropdown-toggle {
   color: #fff !important;
-  background-color: rgb(76.5, 119.85, 202.3) !important;
-  border-color: rgb(76.5, 119.85, 202.3) !important;
+  background-color: rgb(250, 148, 22) !important;
+  border-color: rgb(250, 148, 22) !important;
 }
 .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .btn-primary.show.dropdown-toggle:focus, .show > .btn-primary.dropdown-toggle:focus {
   box-shadow: none;
@@ -321,13 +321,13 @@ button.list-group-item-primary.active {
 
 .btn-group .btn-primary,
 .input-group .btn-primary {
-  border-right: var(--bs-border-width) solid rgb(76.5, 119.85, 202.3);
-  border-left: var(--bs-border-width) solid rgb(76.5, 119.85, 202.3);
+  border-right: var(--bs-border-width) solid rgb(250, 148, 22);
+  border-left: var(--bs-border-width) solid rgb(250, 148, 22);
 }
 
 .btn-group-vertical .btn-primary {
-  border-top-color: rgb(76.5, 119.85, 202.3);
-  border-bottom-color: rgb(76.5, 119.85, 202.3);
+  border-top-color: rgb(250, 148, 22);
+  border-bottom-color: rgb(250, 148, 22);
 }
 
 .btn-label-primary {
@@ -342,12 +342,12 @@ button.list-group-item-primary.active {
 }
 .btn-label-primary:focus, .btn-label-primary.focus {
   color: #fff;
-  background: rgb(76.5, 119.85, 202.3);
+  background: rgb(250, 148, 22);
   box-shadow: none !important;
 }
 .btn-label-primary:active, .btn-label-primary.active, .btn-label-primary.show.dropdown-toggle, .show > .btn-label-primary.dropdown-toggle {
   color: #fff !important;
-  background-color: rgb(76.5, 119.85, 202.3) !important;
+  background-color: rgb(250, 148, 22) !important;
   border-color: transparent !important;
 }
 .btn-label-primary:active:focus, .btn-label-primary.active:focus, .btn-label-primary.show.dropdown-toggle:focus, .show > .btn-label-primary.dropdown-toggle:focus {
@@ -362,13 +362,13 @@ button.list-group-item-primary.active {
 
 .btn-group .btn-label-primary,
 .input-group .btn-label-primary {
-  border-right: var(--bs-border-width) solid rgb(76.5, 119.85, 202.3);
-  border-left: var(--bs-border-width) solid rgb(76.5, 119.85, 202.3);
+  border-right: var(--bs-border-width) solid rgb(250, 148, 22);
+  border-left: var(--bs-border-width) solid rgb(250, 148, 22);
 }
 
 .btn-group-vertical .btn-label-primary {
-  border-top-color: rgb(76.5, 119.85, 202.3);
-  border-bottom-color: rgb(76.5, 119.85, 202.3);
+  border-top-color: rgb(250, 148, 22);
+  border-bottom-color: rgb(250, 148, 22);
 }
 
 .btn-outline-primary {
@@ -383,14 +383,14 @@ button.list-group-item-primary.active {
 }
 .btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
   color: #fff;
-  background-color: rgb(76.5, 119.85, 202.3);
-  border-color: rgb(76.5, 119.85, 202.3);
+  background-color: rgb(250, 148, 22);
+  border-color: rgb(250, 148, 22);
   box-shadow: none;
 }
 .btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show {
   color: #fff !important;
-  background-color: rgb(76.5, 119.85, 202.3) !important;
-  border-color: rgb(76.5, 119.85, 202.3) !important;
+  background-color: rgb(250, 148, 22) !important;
+  border-color: rgb(250, 148, 22) !important;
 }
 .btn-check:checked + .btn-outline-primary:focus, .btn-check:active + .btn-outline-primary:focus, .btn-outline-primary:active:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus {
   box-shadow: none;
@@ -433,7 +433,7 @@ button.list-group-item-primary.active {
 }
 
 .nav .nav-link:hover, .nav .nav-link:focus {
-  color: rgb(81, 126.9, 214.2);
+  color: rgb(250, 148, 22);
 }
 
 .nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus {
@@ -1109,12 +1109,12 @@ li.ui-timepicker-selected,
 }
 .fc .fc-button-primary:not(.fc-prev-button):not(.fc-next-button):focus, .fc .fc-button-primary:not(.fc-prev-button):not(.fc-next-button).focus {
   color: #fff;
-  background: rgb(76.5, 119.85, 202.3);
+  background: rgb(250, 148, 22);
   box-shadow: none !important;
 }
 .fc .fc-button-primary:not(.fc-prev-button):not(.fc-next-button):active, .fc .fc-button-primary:not(.fc-prev-button):not(.fc-next-button).active, .fc .fc-button-primary:not(.fc-prev-button):not(.fc-next-button).show.dropdown-toggle, .show > .fc .fc-button-primary:not(.fc-prev-button):not(.fc-next-button).dropdown-toggle {
   color: #fff !important;
-  background-color: rgb(76.5, 119.85, 202.3) !important;
+  background-color: rgb(250, 148, 22) !important;
   border-color: transparent !important;
 }
 .fc .fc-button-primary:not(.fc-prev-button):not(.fc-next-button):active:focus, .fc .fc-button-primary:not(.fc-prev-button):not(.fc-next-button).active:focus, .fc .fc-button-primary:not(.fc-prev-button):not(.fc-next-button).show.dropdown-toggle:focus, .show > .fc .fc-button-primary:not(.fc-prev-button):not(.fc-next-button).dropdown-toggle:focus {
@@ -1128,12 +1128,12 @@ li.ui-timepicker-selected,
 }
 .fc .btn-group .fc-button-primary:not(.fc-prev-button):not(.fc-next-button),
 .fc .input-group .fc-button-primary:not(.fc-prev-button):not(.fc-next-button) {
-  border-right: var(--bs-border-width) solid rgb(76.5, 119.85, 202.3);
-  border-left: var(--bs-border-width) solid rgb(76.5, 119.85, 202.3);
+  border-right: var(--bs-border-width) solid rgb(250, 148, 22);
+  border-left: var(--bs-border-width) solid rgb(250, 148, 22);
 }
 .fc .btn-group-vertical .fc-button-primary:not(.fc-prev-button):not(.fc-next-button) {
-  border-top-color: rgb(76.5, 119.85, 202.3);
-  border-bottom-color: rgb(76.5, 119.85, 202.3);
+  border-top-color: rgb(250, 148, 22);
+  border-bottom-color: rgb(250, 148, 22);
 }
 .fc .fc-button-primary:not(.fc-prev-button):not(.fc-next-button).fc-button-active {
   background-color: #ecb558 !important;
@@ -1193,14 +1193,14 @@ li.ui-timepicker-selected,
 }
 .btn-check:focus + .shepherd-element .shepherd-button:not(:disabled).btn-primary, .shepherd-element .shepherd-button:not(:disabled).btn-primary:focus, .shepherd-element .shepherd-button:not(:disabled).btn-primary.focus {
   color: #fff;
-  background-color: rgb(76.5, 119.85, 202.3);
-  border-color: rgb(76.5, 119.85, 202.3);
+  background-color: rgb(250, 148, 22);
+  border-color: rgb(250, 148, 22);
   box-shadow: none;
 }
 .btn-check:checked + .shepherd-element .shepherd-button:not(:disabled).btn-primary, .btn-check:active + .shepherd-element .shepherd-button:not(:disabled).btn-primary, .shepherd-element .shepherd-button:not(:disabled).btn-primary:active, .shepherd-element .shepherd-button:not(:disabled).btn-primary.active, .shepherd-element .shepherd-button:not(:disabled).btn-primary.show.dropdown-toggle, .show > .shepherd-element .shepherd-button:not(:disabled).btn-primary.dropdown-toggle {
   color: #fff !important;
-  background-color: rgb(76.5, 119.85, 202.3) !important;
-  border-color: rgb(76.5, 119.85, 202.3) !important;
+  background-color: rgb(250, 148, 22) !important;
+  border-color: rgb(250, 148, 22) !important;
 }
 .btn-check:checked + .shepherd-element .shepherd-button:not(:disabled).btn-primary:focus, .btn-check:active + .shepherd-element .shepherd-button:not(:disabled).btn-primary:focus, .shepherd-element .shepherd-button:not(:disabled).btn-primary:active:focus, .shepherd-element .shepherd-button:not(:disabled).btn-primary.active:focus, .shepherd-element .shepherd-button:not(:disabled).btn-primary.show.dropdown-toggle:focus, .show > .shepherd-element .shepherd-button:not(:disabled).btn-primary.dropdown-toggle:focus {
   box-shadow: none;
@@ -1213,12 +1213,12 @@ li.ui-timepicker-selected,
 }
 .shepherd-element .btn-group .shepherd-button:not(:disabled).btn-primary,
 .shepherd-element .input-group .shepherd-button:not(:disabled).btn-primary {
-  border-right: var(--bs-border-width) solid rgb(76.5, 119.85, 202.3);
-  border-left: var(--bs-border-width) solid rgb(76.5, 119.85, 202.3);
+  border-right: var(--bs-border-width) solid rgb(250, 148, 22);
+  border-left: var(--bs-border-width) solid rgb(250, 148, 22);
 }
 .shepherd-element .btn-group-vertical .shepherd-button:not(:disabled).btn-primary {
-  border-top-color: rgb(76.5, 119.85, 202.3);
-  border-bottom-color: rgb(76.5, 119.85, 202.3);
+  border-top-color: rgb(250, 148, 22);
+  border-bottom-color: rgb(250, 148, 22);
 }
 .shepherd-element .shepherd-button:not(:disabled).btn-label-secondary {
   color: #69809a;

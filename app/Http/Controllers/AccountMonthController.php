@@ -57,7 +57,9 @@ class AccountMonthController extends Controller
                     'account_month_id'=>$account_month->id  ,
                     'tuition'=>$acc->tuition,
                     'tuition_extra'=>$acc->tuition_extra,
+                    'tuition_deduct'=>$acc->tuition_deduct,
                     'food'=>$acc->food,
+                    'food_extra'=>$acc->food_extra,
                     'transport'=>$acc->transport,
                     'transport_extra'=>$acc->transport_extra,
                     'deposit'=>$acc->deposit,
@@ -140,7 +142,7 @@ class AccountMonthController extends Controller
         }else{
             $account->update([$column_name=>$table_value]);
     
-            $total = $account->tuition + $account->tuition_extra + $account->food + $account->transport + $account->transport_extra + $account->deposit + $account->material + $account->registration + $account->extra + $account->extra_2;
+            $total = $account->tuition + $account->tuition_extra + $account->tuition_deduct + $account->food + $account->food_extra + $account->transport + $account->transport_extra + $account->deposit + $account->material + $account->registration + $account->extra + $account->extra_2;
             
             $account->update(['total'=>$total]);
             

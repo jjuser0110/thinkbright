@@ -18,6 +18,7 @@ class Student extends Model
         'level',
         'deposit',
         'class',
+        'category_id',
         'school_id',
         'parent_name',
         'parent_contact',
@@ -31,5 +32,10 @@ class Student extends Model
     public function school()
     {
         return $this->belongsTo('App\Models\School');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
     }
 }

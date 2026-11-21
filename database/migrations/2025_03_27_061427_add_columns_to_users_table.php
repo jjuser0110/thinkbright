@@ -15,7 +15,7 @@ class AddColumnsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('shortname')->nullable();
-            $table->integer('bank_id')->nullablle();
+            $table->integer('bank_id')->nullable();
             $table->string('bank_account')->nullable();
             $table->integer('no_of_annual_leave')->nullable();
         });

@@ -21,6 +21,7 @@ class AdminUserSeeder extends Seeder
                 'password' => Hash::make('admin123456'),
                 'role' => 'admin',
                 'is_active' => 1,
+                'bank_id' => null,
             ]
         );
 

@@ -29,7 +29,9 @@ class User extends Authenticatable
         'shortname',
         'bank_id',
         'bank_account',
-        'no_of_annual_leave'
+        'no_of_annual_leave',
+        'no_of_sick_leave',
+        'basic_salary',
     ];
 
     /**
@@ -49,7 +51,13 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'basic_salary' => 'decimal:2',
     ];
+
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class);
+    }
 
     public function isAdmin(): bool
     {

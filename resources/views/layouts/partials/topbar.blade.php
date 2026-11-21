@@ -45,7 +45,7 @@
             <li>
               <a class="dropdown-item border-radius-md py-2" href="{{ route('notifications.open', $n->id) }}">
                 <div class="d-flex flex-column">
-                  <span class="text-sm">{{ $n->data['message'] ?? __('Notification') }}</span>
+                  <span class="text-sm">{{ \App\Support\NotificationText::render($n->data) }}</span>
                   <span class="text-xs text-secondary"><i class="fa-regular fa-clock me-1"></i>{{ $n->created_at->diffForHumans() }}</span>
                 </div>
               </a>

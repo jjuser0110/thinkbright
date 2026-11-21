@@ -19,7 +19,7 @@
         <li class="list-group-item bg-transparent px-0 d-flex justify-content-between align-items-start">
           <a href="{{ route('notifications.open', $n->id) }}" class="text-sm {{ $n->read_at ? 'text-secondary' : 'font-weight-bold text-dark' }}">
             @unless ($n->read_at)<i class="fa-solid fa-circle text-primary me-2" style="font-size:.5rem;vertical-align:middle"></i>@endunless
-            {{ $n->data['message'] ?? __('Notification') }}
+            {{ \App\Support\NotificationText::render($n->data) }}
           </a>
           <span class="text-xs text-secondary text-nowrap ms-3">{{ $n->created_at->diffForHumans() }}</span>
         </li>

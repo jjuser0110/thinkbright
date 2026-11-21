@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\OneToOneClass;
+use App\Support\NotificationText;
 use Illuminate\Notifications\Notification;
 
 class OneToOneAssigned extends Notification
@@ -22,14 +23,11 @@ class OneToOneAssigned extends Notification
             ? 'Your 1-to-1 class with :student (:subject) was updated: :day :time'
             : 'New 1-to-1 class: :student (:subject), every :day :time';
 
-        return [
-            'message' => __($key, [
-                'student' => $this->class->student->displayName(),
-                'subject' => $this->class->subject,
-                'day' => $this->class->dayName(),
-                'time' => $this->class->timeRange(),
-            ]),
-            'url' => route('my_classes.index'),
-        ];
+        return NotificationText::make($key, [
+            'student' => $this->class->student->displayName(),
+            'subject' => $this->class->subject,
+            'day' => OneToOneClass::DAYS[$this->class->day] ?? '',
+            'time' => $this->class->timeRange(),
+        ], route('my_classes.index'), ['day']);
     }
 }

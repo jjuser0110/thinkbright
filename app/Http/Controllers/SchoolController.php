@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Spatie\Browsershot\Browsershot;
-use Illuminate\Http\Request;
 use App\Models\School;
+use Illuminate\Http\Request;
 
 class SchoolController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $school = School::all();
-        
-        return view('school.index')->with('school',$school);
+        $school = School::orderBy('name')->get();
+
+        return view('school.index')->with('school', $school);
     }
 
     public function create()
@@ -23,28 +21,35 @@ class SchoolController extends Controller
 
     public function store(Request $request)
     {
-        School::create($request->all());
-        
-        return redirect()->route('school.index');
+        School::create($this->validated($request));
+
+        return redirect()->route('school.index')->with('success', __('School saved.'));
     }
 
     public function edit(School $school)
     {
-        return view('school.create')->with('school',$school);
+        return view('school.create')->with('school', $school);
     }
 
     public function update(Request $request, School $school)
     {
-        $school->update($request->all());
-        
-        return redirect()->route('school.index');
+        $school->update($this->validated($request));
+
+        return redirect()->route('school.index')->with('success', __('School saved.'));
     }
 
     public function destroy(School $school)
     {
         $school->delete();
 
-        return redirect()->route('school.index');
+        return redirect()->route('school.index')->with('success', __('School deleted.'));
     }
-   
+
+    private function validated(Request $request): array
+    {
+        return $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'transport_fee' => ['nullable', 'numeric', 'min:0'],
+        ]);
+    }
 }

@@ -12,5 +12,15 @@ class School extends Model
 	use SoftDeletes;
 	protected $fillable = [
         'name',
+        'transport_fee',
     ];
+
+    protected $casts = [
+        'transport_fee' => 'decimal:2',
+    ];
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 }

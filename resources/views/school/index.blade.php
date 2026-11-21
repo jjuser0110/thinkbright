@@ -1,59 +1,40 @@
 @extends('layouts.app')
 
-<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-@section('body')
-<h4 class="font-weight-bolder mb-0">Schools</h4>
-<div class="row" style="margin-top:20px">
-    <div class="card">
-      <div class="card-body p-3">
-      <button class="btn btn-sm btn-primary" style="margin-right:10px" onclick="window.location.href='{{ route('school.create') }}'"><i class="mdi mdi-plus-circle-outline"></i>Add School</button>  
-      
-        <div class="row">
-            <table id="example1" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th >Name</th>
-                  <th ></th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($school as $c)
-                  <tr>
-                    <td>{{$c->name ??""}}</td>
-                    <td>
-                      <a style="text-decoration: none; color: inherit;" href="{{ route('school.edit',$c) }}" title="Edit">
-                        <i class="fas fa-pencil-alt"></i>
-                      </a>
-                      &nbsp;&nbsp;
-                      @if(Auth::user()->role == "superadmin")
-                        <button type="button" style="background: none; padding: 0px; border: none; color: inherit;" onclick="if(confirm('Are you sure you want to delete?')){ window.location.href='{{ route('school.destroy',$c) }}' }"><i class="fas fa-trash-alt"></i></button>
-                        @endif
-                    </td>
-                  </tr>
-                  @endforeach
-              </tbody>  
-            </table>
-        </div>
-      </div>
-    </div>
-</div>
+@section('title', __('School Setting'))
 
+@section('body')
+<div class="card">
+  <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+    <h6 class="mb-0">{{ __('Schools') }}</h6>
+    <a href="{{ route('school.create') }}" class="btn btn-sm bg-gradient-primary mb-0"><i class="fa-solid fa-plus me-1"></i>{{ __('Add School') }}</a>
+  </div>
+  <div class="card-body">
+    <table id="school-table" class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>{{ __('Name') }}</th>
+          <th class="text-end">{{ __('Transport fee (RM)') }}</th>
+          <th class="text-end">{{ __('Students') }}</th>
+          <th class="no-sort"></th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($school as $c)
+          <tr>
+            <td>{{ $c->name }}</td>
+            <td class="text-end">{!! is_null($c->transport_fee) ? '<span class="text-warning">'.e(__('Not set')).'</span>' : number_format($c->transport_fee, 2) !!}</td>
+            <td class="text-end">{{ $c->students()->where('is_active', 1)->count() }}</td>
+            <td class="text-end text-nowrap">
+              <a href="{{ route('school.edit', $c) }}" class="text-body me-3" title="{{ __('Edit') }}"><i class="fas fa-pencil-alt"></i></a>
+              @if (Auth::user()->role === 'superadmin')
+                <a href="{{ route('school.destroy', $c) }}" class="text-danger" title="{{ __('Delete') }}" data-confirm="{{ __('Are you sure you want to delete?') }}"><i class="fas fa-trash-alt"></i></a>
+              @endif
+            </td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+</div>
+@include('layouts.partials.datatables', ['table' => '#school-table', 'options' => ['columnDefs' => [['orderable' => false, 'targets' => 'no-sort']]]])
 @endsection
-<script src="{{ asset('js/jquery-3.4.1.min.js')}}"></script>
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-<script>
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-  // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-  }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
-  </script>

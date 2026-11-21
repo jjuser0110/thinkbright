@@ -71,3 +71,4 @@
 [data-theme="dark"] .alert-success { background-image: none; background-color: #14532d; color: #dcfce7; }
 [data-theme="dark"] .page-link { background-color: #1f2937; border-color: #374151; color: #d1d5db; }
 [data-theme="dark"] .navbar-brand-img { background: #fff; border-radius: .5rem; padding: 2px 6px; }
+[data-theme="dark"] .card-header, [data-theme="dark"] .card-footer { background-color: transparent !important; }

@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Hash;
 class AdminUserSeeder extends Seeder
 {
     /**
-     * Create (or reset) the default admin login.
+     * Create the default admin login if it does not exist yet.
+     * An existing "admin" user is never modified, so this is safe on live data.
      */
     public function run(): void
     {
-        $admin = User::updateOrCreate(
+        $admin = User::firstOrCreate(
             ['username' => 'admin'],
             [
                 'name' => 'Admin',
@@ -21,10 +22,11 @@ class AdminUserSeeder extends Seeder
                 'password' => Hash::make('admin123456'),
                 'role' => 'admin',
                 'is_active' => 1,
-                'bank_id' => null,
             ]
         );
 
-        $admin->forceFill(['email_verified_at' => $admin->email_verified_at ?? now()])->save();
+        if ($admin->wasRecentlyCreated) {
+            $admin->forceFill(['email_verified_at' => now()])->save();
+        }
     }
 }

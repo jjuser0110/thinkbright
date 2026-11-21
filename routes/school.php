@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/school')->as('school.')->middleware('auth')->group(function() {
+Route::prefix('/school')->as('school.')->middleware(['auth', 'admin'])->group(function() {
     Route::get('/index', 'SchoolController@index')->name('index');
     Route::get('/create', 'SchoolController@create')->name('create');
     Route::post('/store', 'SchoolController@store')->name('store');

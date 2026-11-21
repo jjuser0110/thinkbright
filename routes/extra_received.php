@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/extra_received')->as('extra_received.')->middleware('auth')->group(function() {
+Route::prefix('/extra_received')->as('extra_received.')->middleware(['auth', 'admin'])->group(function() {
     Route::get('/index', 'ExtraReceivedController@index')->name('index');
     Route::get('/create', 'ExtraReceivedController@create')->name('create');
     Route::post('/store', 'ExtraReceivedController@store')->name('store');

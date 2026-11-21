@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/receipt')->as('receipt.')->middleware('auth')->group(function() {
+Route::prefix('/receipt')->as('receipt.')->middleware(['auth', 'admin'])->group(function() {
     Route::get('/index', 'ReceiptController@index')->name('index');
     Route::get('/create', 'ReceiptController@create')->name('create');
     Route::post('/store', 'ReceiptController@store')->name('store');

@@ -1,0 +1,73 @@
+/* Think Bright: app-wide helpers and dark theme on top of Soft UI Dashboard */
+
+/* Helpers used by existing views */
+.float-right { float: right; margin-right: 10px; }
+.margin_top { margin-top: 10px; }
+.full_height { max-height: 4em !important; }
+
+/* Sidebar */
+.tb-submenu .nav-link { padding-top: .35rem; padding-bottom: .35rem; font-size: .875rem; }
+.tb-submenu .nav-link.active { color: #cb0c9f; }
+#sidenav-collapse-main { overflow-y: auto; max-height: calc(100vh - 140px); }
+
+/* Top bar */
+.tb-badge { font-size: .6rem; padding: .25em .45em; }
+.tb-notif-menu { min-width: 300px; max-width: 360px; }
+.tb-notif-menu .dropdown-item { white-space: normal; }
+.avatar.avatar-sm { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: .85rem; }
+[data-theme="dark"] .tb-icon-dark, [data-theme="light"] .tb-icon-light { display: none; }
+
+/* Status pills */
+.tb-pill { display: inline-block; padding: .2em .65em; border-radius: 1rem; font-size: .75rem; font-weight: 600; }
+.tb-pill-pending { background: #fff4de; color: #b26b00; }
+.tb-pill-approved { background: #dcf7e3; color: #17803d; }
+.tb-pill-rejected, .tb-pill-cancelled { background: #fde2e2; color: #b42318; }
+.tb-yes { color: #17ad37; }
+.tb-no { color: #c4c4c4; }
+
+/* Weekly timetable grid */
+.tb-timetable th, .tb-timetable td { vertical-align: top; min-width: 140px; }
+.tb-slot { border-radius: .5rem; padding: .4rem .5rem; margin-bottom: .35rem; background: #f0f2ff; border-left: 3px solid #cb0c9f; font-size: .8rem; }
+.tb-slot .tb-slot-time { font-weight: 700; display: block; }
+.tb-today { background: rgba(203, 12, 159, .06); }
+
+@media print {
+  .sidenav, .tb-topbar, .no-print { display: none !important; }
+  .main-content { margin-left: 0 !important; }
+}
+
+/* ---------- Dark theme ---------- */
+[data-theme="dark"] body,
+[data-theme="dark"] .bg-gray-100 { background-color: #111827 !important; color: #d1d5db; }
+[data-theme="dark"] .sidenav,
+[data-theme="dark"] .card,
+[data-theme="dark"] .dropdown-menu,
+[data-theme="dark"] .modal-content { background-color: #1f2937 !important; color: #d1d5db; }
+[data-theme="dark"] .dropdown-menu:before { color: #1f2937 !important; }
+[data-theme="dark"] .navbar-main { background-color: transparent !important; }
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
+[data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6,
+[data-theme="dark"] .text-dark, [data-theme="dark"] .text-body,
+[data-theme="dark"] label, [data-theme="dark"] .nav-link-text,
+[data-theme="dark"] .navbar-vertical .navbar-nav .nav-link,
+[data-theme="dark"] .dropdown-item { color: #e5e7eb !important; }
+[data-theme="dark"] .text-secondary { color: #9ca3af !important; }
+[data-theme="dark"] .dropdown-item:hover, [data-theme="dark"] .dropdown-item:focus,
+[data-theme="dark"] .dropdown-item.active { background-color: #374151 !important; }
+[data-theme="dark"] .navbar-vertical .navbar-nav > .nav-item .nav-link.active { background-color: #374151 !important; box-shadow: none; }
+[data-theme="dark"] .icon-shape.bg-white { background-color: #374151 !important; }
+[data-theme="dark"] .icon-shape .text-dark { color: #e5e7eb !important; }
+[data-theme="dark"] .table, [data-theme="dark"] .table td, [data-theme="dark"] .table th { color: #d1d5db; border-color: #374151; }
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > * { --bs-table-accent-bg: rgba(255,255,255,.03); color: #d1d5db; }
+[data-theme="dark"] .form-control, [data-theme="dark"] .form-select,
+[data-theme="dark"] .select2-container--default .select2-selection--single,
+[data-theme="dark"] .input-group-text { background-color: #111827 !important; color: #e5e7eb !important; border-color: #4b5563 !important; }
+[data-theme="dark"] .form-control::placeholder { color: #6b7280; }
+[data-theme="dark"] .select2-dropdown { background-color: #1f2937; color: #e5e7eb; }
+[data-theme="dark"] hr.horizontal.dark { background-image: linear-gradient(90deg, transparent, #4b5563, transparent); }
+[data-theme="dark"] .tb-slot { background: #273449; }
+[data-theme="dark"] .tb-today { background: rgba(203, 12, 159, .12); }
+[data-theme="dark"] .btn-outline-secondary { color: #d1d5db; border-color: #6b7280; }
+[data-theme="dark"] .alert-success { background-image: none; background-color: #14532d; color: #dcfce7; }
+[data-theme="dark"] .page-link { background-color: #1f2937; border-color: #374151; color: #d1d5db; }
+[data-theme="dark"] .navbar-brand-img { background: #fff; border-radius: .5rem; padding: 2px 6px; }

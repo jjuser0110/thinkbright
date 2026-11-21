@@ -51,6 +51,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function isAdmin(): bool
+    {
+        return in_array($this->role, ['admin', 'superadmin'], true);
+    }
+
+    public function isTeacher(): bool
+    {
+        return $this->role === 'teacher';
+    }
+
+    public function scopeTeachers($query)
+    {
+        return $query->where('role', 'teacher');
+    }
+
+    public function scopeAdmins($query)
+    {
+        return $query->whereIn('role', ['admin', 'superadmin']);
+    }
+
     public function routeNotificationForWhatsApp()
     {
         return $this->contact;

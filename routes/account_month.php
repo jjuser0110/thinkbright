@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/account_month')->as('account_month.')->middleware('auth')->group(function() {
+Route::prefix('/account_month')->as('account_month.')->middleware(['auth', 'admin'])->group(function() {
     Route::get('/index', 'AccountMonthController@index')->name('index');
     Route::get('/create', 'AccountMonthController@create')->name('create');
     Route::post('/store', 'AccountMonthController@store')->name('store');

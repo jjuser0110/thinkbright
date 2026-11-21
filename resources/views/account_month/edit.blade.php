@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', __('Monthly Account').' · '.$account_month->month.'/'.$account_month->year)
+
 @section('body')
 <style>
   .table thead th {
@@ -9,7 +11,13 @@
     padding: 0.05rem 0.05rem;
   }
   </style>
-<h4 class="font-weight-bolder mb-0">Add Account Month</h4>
+<div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
+  <h4 class="font-weight-bolder mb-0">{{ __('Account') }} {{ $account_month->month }}/{{ $account_month->year }}</h4>
+  <form method="POST" action="{{ route('account_month.apply_fees', $account_month) }}" data-confirm="{{ __('Refresh all UNPAID rows from current enrolment (daycare, bath & lunch, transport, 1-to-1)? Paid rows are not changed.') }}">
+    @csrf
+    <button type="submit" class="btn btn-sm bg-gradient-primary mb-0"><i class="fa-solid fa-wand-magic-sparkles me-1"></i>{{ __('Apply enrolment fees') }}</button>
+  </form>
+</div>
 <div class="row margin_top">
     <div class="card">
       <div class="card-body p-3">
@@ -21,6 +29,7 @@
                   <th >Student</th>
                   <th style="text-align:center">Tuition</th>
                   <th style="text-align:center">TT Add</th>
+                  <th style="text-align:center">1-to-1</th>
                   <th style="text-align:center">B&L</th>
                   <th style="text-align:center">Trans</th>
                   <th style="text-align:center">Trans Add</th>
@@ -39,11 +48,12 @@
               <tbody >
                 <?php $index=1; ?>
                 @foreach ($account_month->accounts as $a)
-                  <tr id="tr~{{$a->id}}" <?php echo $a->paid!=null ?'style="background-color:lightgreen"':'' ?>>
+                  <tr id="tr~{{$a->id}}" class="{{ $a->paid ? 'tb-paid' : '' }}">
                     <td style="text-align:center">{{$index ??""}}</td>
                     <td>{{$a->student->name ??""}}</td>
                     <td style="text-align:center"><input type="number"  step="0.01" style="width:70px;text-align:center" name="tuition~{{$a->id}}" id="tuition~{{$a->id}}" value="{{$a->tuition??''}}" onchange="saveData(this)"></td>
                     <td style="text-align:center"><input type="number"  step="0.01" style="width:70px;text-align:center" name="tuition_extra~{{$a->id}}" id="tuition_extra~{{$a->id}}" value="{{$a->tuition_extra??''}}" onchange="saveData(this)"></td>
+                    <td style="text-align:center"><input type="number"  step="0.01" style="width:70px;text-align:center" name="one_to_one~{{$a->id}}" id="one_to_one~{{$a->id}}" value="{{$a->one_to_one??''}}" onchange="saveData(this)"></td>
                     <td style="text-align:center"><input type="number"  step="0.01" style="width:70px;text-align:center" name="food~{{$a->id}}" id="food~{{$a->id}}" value="{{$a->food??''}}" onchange="saveData(this)"></td>
                     <td style="text-align:center"><input type="number"  step="0.01" style="width:70px;text-align:center" name="transport~{{$a->id}}" id="transport~{{$a->id}}" value="{{$a->transport??''}}" onchange="saveData(this)"></td>
                     <td style="text-align:center"><input type="number"  step="0.01" style="width:70px;text-align:center" name="transport_extra~{{$a->id}}" id="transport_extra~{{$a->id}}" value="{{$a->transport_extra??''}}" onchange="saveData(this)"></td>
@@ -67,6 +77,7 @@
                   <th >Student</th>
                   <th style="text-align:center">Tuition</th>
                   <th style="text-align:center">TT Add</th>
+                  <th style="text-align:center">1-to-1</th>
                   <th style="text-align:center">B&L</th>
                   <th style="text-align:center">Trans</th>
                   <th style="text-align:center">Trans Add</th>
@@ -116,7 +127,9 @@
       method: 'GET',
       success: function(data) {
         if(data.account.paid != null){
-          document.getElementById(data.column_name).style.backgroundColor = 'lightgreen';
+          document.getElementById(data.column_name).classList.add('tb-paid');
+        } else {
+          document.getElementById(data.column_name).classList.remove('tb-paid');
         }
       },
     })

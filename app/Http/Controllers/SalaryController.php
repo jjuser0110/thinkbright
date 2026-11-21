@@ -51,6 +51,29 @@ class SalaryController extends Controller
         return redirect()->route('salary.index');
     }
 
+    /** JSON: the teacher's basic salary and 1-to-1 commission for a month (YYYY-MM). */
+    public function prefill(Request $request)
+    {
+        $data = $request->validate([
+            'user_id' => ['required', 'exists:users,id'],
+            'year_month' => ['required', 'date_format:Y-m'],
+        ]);
+        [$year, $month] = array_map('intval', explode('-', $data['year_month']));
+        $teacher = User::findOrFail($data['user_id']);
+        $classes = $teacher->oneToOneClasses()->activeInMonth($year, $month)->count();
+        $commission = $teacher->oneToOneCommission($year, $month);
+
+        return response()->json([
+            'basic' => $teacher->basic_salary,
+            'commission' => number_format($commission, 2, '.', ''),
+            'message' => __(':name: :count 1-to-1 class(es), commission RM:amount', [
+                'name' => $teacher->name,
+                'count' => $classes,
+                'amount' => number_format($commission, 2),
+            ]),
+        ]);
+    }
+
     public function destroy(Salary $salary)
     {
         $salary->delete();

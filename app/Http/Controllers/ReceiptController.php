@@ -62,6 +62,9 @@ class ReceiptController extends Controller
                 case "tuition_extra":
                   $item_name = "Additional Tuition Fees";
                   break;
+                case "one_to_one":
+                  $item_name = "1-to-1 Class";
+                  break;
                 case "food":
                     $item_name = "Bath & Lunch";
                   break;

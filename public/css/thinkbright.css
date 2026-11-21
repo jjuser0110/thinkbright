@@ -72,3 +72,7 @@
 [data-theme="dark"] .page-link { background-color: #1f2937; border-color: #374151; color: #d1d5db; }
 [data-theme="dark"] .navbar-brand-img { background: #fff; border-radius: .5rem; padding: 2px 6px; }
 [data-theme="dark"] .card-header, [data-theme="dark"] .card-footer { background-color: transparent !important; }
+/* Paid rows on the monthly account sheet */
+tr.tb-paid > td { background-color: #c8f7c5 !important; }
+[data-theme="dark"] tr.tb-paid > td { background-color: #14532d !important; }
+[data-theme="dark"] .table input[type="number"], [data-theme="dark"] .table input[type="text"] { background: #111827; color: #e5e7eb; border: 1px solid #4b5563; }

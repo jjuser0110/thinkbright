@@ -34,9 +34,9 @@
               <div class="form-group row">
                 <div class="col-sm-4 margin_top">
                 <label for="name">Teacher</label>
-                <select name="user_id" class="form-control" required>
+                <select name="user_id" id="user_id" class="form-control" required>
                   @foreach($teacher as $user)
-                    <option value="{{$user->id}}">{{$user->name}}</option>
+                    <option value="{{$user->id}}" @selected(isset($salary) && $salary->user_id == $user->id)>{{$user->name}}</option>
                   @endforeach
                 </select>
                 </div>
@@ -47,6 +47,12 @@
                 <div class="col-sm-4 margin_top">
                 <label for="name">Payment Date</label>
                 <input type="date" class="dateformat form-control" id="payment_date" name="payment_date" data-date="" data-date-format="DD MMMM YYYY" @if(isset($salary)) value="{{$salary->payment_date}}" @else value="<?php echo date('Y-m-d'); ?>" @endif required autocomplete="off">
+                </div>
+                <div class="col-sm-12 margin_top">
+                  <button type="button" class="btn btn-sm btn-outline-primary mb-0" id="prefill-btn">
+                    <i class="fa-solid fa-wand-magic-sparkles me-1"></i>{{ __('Fill basic salary & 1-to-1 commission') }}
+                  </button>
+                  <span class="text-xs text-secondary ms-2" id="prefill-info">{{ __('Uses the teacher\'s basic salary and the commission from 1-to-1 classes in the payment month.') }}</span>
                 </div>
                 <div class="col-sm-3 margin_top">
                   <h5><b>Earnings</b></h5>
@@ -160,6 +166,20 @@
 
 
 <script>
+document.getElementById('prefill-btn').addEventListener('click', function () {
+  var month = document.getElementById('year_month').value;
+  var info = document.getElementById('prefill-info');
+  if (!month) { info.textContent = @json(__('Choose the payment month first.')); return; }
+  fetch(@json(route('salary.prefill')) + '?user_id=' + encodeURIComponent(document.getElementById('user_id').value) + '&year_month=' + encodeURIComponent(month), { headers: { 'Accept': 'application/json' } })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d.basic !== null) document.getElementById('basic').value = d.basic;
+      document.getElementById('commission').value = d.commission;
+      info.textContent = d.message;
+      calculateTotal();
+    });
+});
+
 //   $("input[type='date']").on("change", function() {
 //     this.setAttribute(
 //         "data-date",

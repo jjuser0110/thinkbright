@@ -64,6 +64,7 @@
                 <input type="checkbox" onClick="toggle(this)" value="select_all"/> Select All<br/>
                 <input type="checkbox"  name="selected_field[]"  value="tuition"> Tuition <br>
                 <input type="checkbox"  name="selected_field[]"  value="tuition_extra"> Tuition Extra<br>
+                <input type="checkbox"  name="selected_field[]"  value="one_to_one"> 1-to-1 Class<br>
                 <input type="checkbox"  name="selected_field[]"  value="food"> Food <br>
                 <input type="checkbox"  name="selected_field[]"  value="transport"> Transport <br>
                 <input type="checkbox"  name="selected_field[]"  value="transport_extra"> Transport Extra <br>

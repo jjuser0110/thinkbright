@@ -49,6 +49,11 @@ class Student extends Model
         return $this->belongsTo(School::class);
     }
 
+    public function oneToOneClasses()
+    {
+        return $this->hasMany(OneToOneClass::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', 1);
@@ -63,17 +68,20 @@ class Student extends Model
      * Effective monthly charges from this student's enrolment.
      * Custom amounts on the student win; otherwise Fee Setting (daycare, bath & lunch)
      * and the school's transport fee are used. Services not taken are 0.
+     * One-to-one fees cover classes running in the given month (default: classes running today).
      *
      * @return array{daycare: float, bath_lunch: float, transport: float, one_to_one: float, total: float}
      */
-    public function monthlyCharges(): array
+    public function monthlyCharges(?int $year = null, ?int $month = null): array
     {
         $daycare = $this->daycare ? (float) ($this->daycare_fee ?? Setting::daycareFee()) : 0.0;
         $bathLunch = $this->bath_lunch ? (float) ($this->bath_lunch_fee ?? Setting::bathLunchFee()) : 0.0;
         $transport = $this->transport ? (float) ($this->transport_fee ?? $this->school?->transport_fee ?? 0) : 0.0;
-        $oneToOne = method_exists($this, 'oneToOneClasses')
-            ? (float) $this->oneToOneClasses()->currentlyActive()->sum('monthly_fee')
-            : 0.0;
+        $classes = $this->oneToOneClasses();
+        $oneToOne = (float) (($year && $month)
+            ? $classes->activeInMonth($year, $month)
+            : $classes->currentlyActive()
+        )->sum('monthly_fee');
 
         return [
             'daycare' => $daycare,

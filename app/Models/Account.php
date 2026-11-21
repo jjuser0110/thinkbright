@@ -15,6 +15,7 @@ class Account extends Model
         'account_month_id',
         'tuition',
         'tuition_extra',
+        'one_to_one',
         'food',
         'transport',
         'transport_extra',

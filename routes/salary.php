@@ -11,4 +11,5 @@ Route::prefix('/salary')->as('salary.')->middleware(['auth', 'admin'])->group(fu
     Route::post('/update/{salary}', 'SalaryController@update')->name('update');
     Route::get('/destroy/{salary}', 'SalaryController@destroy')->name('destroy');
     Route::post('/pdfDetails', 'SalaryController@pdfDetails')->name('pdfDetails');
+    Route::get('/prefill', 'SalaryController@prefill')->name('prefill');
 });

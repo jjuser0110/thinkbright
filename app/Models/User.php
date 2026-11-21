@@ -54,6 +54,19 @@ class User extends Authenticatable
         'basic_salary' => 'decimal:2',
     ];
 
+    /** One-to-one classes this user teaches. */
+    public function oneToOneClasses()
+    {
+        return $this->hasMany(OneToOneClass::class, 'teacher_id');
+    }
+
+    /** Commission earned from one-to-one classes running in the given month. */
+    public function oneToOneCommission(int $year, int $month): float
+    {
+        return round($this->oneToOneClasses()->activeInMonth($year, $month)->get()
+            ->sum(fn ($c) => $c->commissionAmount()), 2);
+    }
+
     public function bank()
     {
         return $this->belongsTo(Bank::class);

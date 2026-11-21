@@ -67,6 +67,33 @@ class User extends Authenticatable
             ->sum(fn ($c) => $c->commissionAmount()), 2);
     }
 
+    public function leaveApplications()
+    {
+        return $this->hasMany(LeaveApplication::class);
+    }
+
+    /** Yearly entitlement in days for 'annual' or 'sick' leave. */
+    public function leaveEntitlement(string $type): float
+    {
+        return (float) ($type === 'sick' ? $this->no_of_sick_leave : $this->no_of_annual_leave);
+    }
+
+    /** Approved leave days taken in a year (default: this year), by start date. */
+    public function leaveUsed(string $type, ?int $year = null): float
+    {
+        return (float) $this->leaveApplications()
+            ->where('type', $type)
+            ->where('status', 'approved')
+            ->whereYear('start_date', $year ?? now()->year)
+            ->sum('days');
+    }
+
+    /** Days still available this year (entitlement minus approved leave). */
+    public function leaveBalance(string $type, ?int $year = null): float
+    {
+        return $this->leaveEntitlement($type) - $this->leaveUsed($type, $year);
+    }
+
     public function bank()
     {
         return $this->belongsTo(Bank::class);
